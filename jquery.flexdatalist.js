@@ -150,14 +150,18 @@ jQuery.fn.flexdatalist = function (_option, _value) {
             this.set.up();
 
             $alias
-            // Focusin
-            .on('focusin', function (event) {
-                _this.action.redoSearchFocus(event);
-                _this.action.showAllResults(event);
-                if ($multiple) {
-                    $multiple.addClass('focus');
-                }
-            })
+                // Focus
+                .on('focus', function (event) {
+                    $alias = $(event.currentTarget);
+
+                    setTimeout(function() {
+                        _this.action.redoSearchFocus(event);
+                        _this.action.showAllResults(event);
+                        if ($multiple) {
+                            $multiple.addClass('focus');
+                        }
+                    }, 200 );
+                })
             // Keydown
             .on('input keydown', function (event) {
                 if (_this.keyNum(event) === 9) {
